@@ -4,11 +4,18 @@ import java.math.BigInteger;
 
 public class CLT13Scheme {
 
-	CLT13Params params;
 	CLT13Key key;
+	
+	public CLT13Scheme(CLT13Key key) {
+		this.key = key;
+	}
 	
 	public CLT13Ciphertext encrypt(int level, BigInteger[] msgs) {
 		return new CLT13Ciphertext(key, level, msgs);
+	}
+	
+	public CLT13Ciphertext encrypt(int level) {
+		return new CLT13Ciphertext(key, level);
 	}
 	
 	public BigInteger[] decrypt(CLT13Ciphertext cipher) {
