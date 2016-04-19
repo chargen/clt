@@ -24,7 +24,7 @@ public class CLT13Scheme {
 		
 		for (int i = 0; i < msgs.length; i++) {
 			BigInteger crtVal = cval.mod(key.getP(i));
-			BigInteger crtVal0 = crtVal.multiply(key.getZpowModp(cipher.getLevel()-1, i)).mod(key.getP(i));
+			BigInteger crtVal0 = crtVal.multiply(key.getZpowModp(cipher.getLevel(), i)).mod(key.getP(i));
 			msgs[i] = crtVal0.remainder(key.getG(i));
 		}
 		

@@ -22,7 +22,7 @@ public class CLT13Ciphertext {
 			BigInteger error = RandomGenerator.rnd(key.getRho());
 			BigInteger crtVal0 = msg.add(key.getG(i).multiply(error));
 			BigInteger crtVal = crtVal0.multiply(key.getZpowModpInv(level, i)).mod(key.getP(i));
-			cval = cval.add(crtVal.multiply(key.getCrtSummand(i)).mod(key.getX0()));
+			cval = cval.add(crtVal.multiply(key.getCrtSummand(i))).mod(key.getX0());
 		}
 	}
 	
@@ -62,6 +62,13 @@ public class CLT13Ciphertext {
 
 	public BigInteger getCval() {
 		return cval;
+	}
+
+	@Override
+	public String toString() {
+		return "CLT13Ciphertext \n\n"
+				+ "[level=" + level + ", \n\n"
+				+ "cval=" + cval + "]\n";
 	}
 	
 	
