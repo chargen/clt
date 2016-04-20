@@ -3,9 +3,13 @@ package snu.crypto.clt;
 import java.math.BigInteger;
 import java.util.Arrays;
 
+import org.apache.log4j.Logger;
+
 import snu.crypto.lll.LLL;
 
 public class CLT13Main {
+
+	private static Logger log = Logger.getLogger(CLT13Main.class);
 
 	public static BigInteger TWO = BigInteger.valueOf(2);
 	
@@ -32,12 +36,12 @@ public class CLT13Main {
 		CLT13Key key = new CLT13Key(params);
 		CLT13Scheme scheme = new CLT13Scheme(key);
 		
-		System.out.println(key);
+		log.info(key);
 		
 		CLT13Ciphertext[] ciphers = new CLT13Ciphertext[dim];
 		for (int i = 0; i < ciphers.length; i++) {
 			ciphers[i] = scheme.encrypt(kappa);
-			System.out.println(ciphers[i]);
+			log.info(ciphers[i]);
 		}
 				
 		BigInteger[][] matrixForLLL = new BigInteger[dim+dimPzt][dim+dimPzt];
@@ -64,25 +68,24 @@ public class CLT13Main {
 		
 		for (int row = 0; row < dim + dimPzt; row++) {
 			for (int col = 0; col < dimPzt; col++) {
-				System.out.println("Step: " + row + " " + col);
+				log.info("Step: " + row + " " + col);
 				BigInteger pztcol = key.getPzt(col);
 				BigInteger sumv = matrixForLLL[row][dim + col];
 				
 				BigInteger sumx = sumv.multiply(pztcol.modInverse(x0)).mod(x0);
-				System.out.println("sumv:  " + sumv.bitLength() + "  " + sumv);
-				System.out.println("X0:    " + x0.bitLength() + "  " + x0);
-				System.out.println("sumx:  " + sumx.bitLength() + "  " + sumx);
+				log.info("sumv:  " + sumv.bitLength() + "  " + sumv);
+				log.info("X0:    " + x0.bitLength() + "  " + x0);
+				log.info("sumx:  " + sumx.bitLength() + "  " + sumx);
 				
 				CLT13Ciphertext sumCipher = new CLT13Ciphertext(kappa, sumx);
 				
 				BigInteger[] sumMsg = scheme.decrypt(sumCipher);
 				
-				System.out.println("MSG: " + Arrays.toString(sumMsg));
+				log.info("MSG: " + Arrays.toString(sumMsg));
 				
 				BigInteger[] gs = key.getGs();
 				
-				System.out.println("Gs:  " + Arrays.toString(gs));		
-				System.out.println("\n\n\n");
+				log.info("Gs:  " + Arrays.toString(gs));
 			}
 		}				
 	}
