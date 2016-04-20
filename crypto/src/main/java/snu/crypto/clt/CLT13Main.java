@@ -14,23 +14,28 @@ public class CLT13Main {
 	public static BigInteger TWO = BigInteger.valueOf(2);
 	
 	public static void main(String[] args) {
-		int n = 5;
+		
+		log.info("START!!!");
+
+		int n = 451;
 		int lambda = 10;
-		int kappa = 10;
+		int kappa = 4;
 		int rho = 10;
 		int alpha = 10;
 		int beta = 10;
-		int eta = 300;
+		int eta = 136;
 		
-		int delta = 1460;
-		int dimPzt = 4;
-		int dim = 10;
+		int delta = 61255;
+		int dimPzt = 20;
+		int dim = 60;
 		
 		BigInteger TWOToDELTA = TWO.pow(delta);	
 		BigInteger[] zeros = new BigInteger[n];
 		for (int i = 0; i < zeros.length; i++) {
 			zeros[i] = BigInteger.ZERO;
 		}
+		
+		log.info("Generating key...");
 		
 		CLT13Params params = new CLT13Params(n, lambda, kappa, eta, alpha, beta, rho);
 		CLT13Key key = new CLT13Key(params);
@@ -73,19 +78,19 @@ public class CLT13Main {
 				BigInteger sumv = matrixForLLL[row][dim + col];
 				
 				BigInteger sumx = sumv.multiply(pztcol.modInverse(x0)).mod(x0);
-				log.info("sumv:  " + sumv.bitLength() + "  " + sumv);
+				log.info("SumV:  " + sumv.bitLength() + "  " + sumv);
 				log.info("X0:    " + x0.bitLength() + "  " + x0);
-				log.info("sumx:  " + sumx.bitLength() + "  " + sumx);
+				log.info("SumX:  " + sumx.bitLength() + "  " + sumx);
 				
 				CLT13Ciphertext sumCipher = new CLT13Ciphertext(kappa, sumx);
 				
 				BigInteger[] sumMsg = scheme.decrypt(sumCipher);
 				
-				log.info("MSG: " + Arrays.toString(sumMsg));
+				log.info("Msgs: " + Arrays.toString(sumMsg));
 				
 				BigInteger[] gs = key.getGs();
 				
-				log.info("Gs:  " + Arrays.toString(gs));
+				log.info("Gs:   " + Arrays.toString(gs));
 			}
 		}				
 	}

@@ -3,10 +3,10 @@
 <log4j:configuration debug="true" xmlns:log4j="http://jakarta.apache.org/log4j/">
 
 	<appender name="clt.file" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="D:/workspace/java/logs/alfa.log"/>
+		<param name="File" value="D:/workspace/java/logs/clt.log"/>
 		<param name="DatePattern" value="'.'yyyy-MMM-dd"/>
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[ALFA] %d{yyyy-MMM-dd HH:mm:ss,SSS} %5p - %m [%x] [%c{2}] [%t]%n"/>
+			<param name="ConversionPattern" value="[CLT] %d{yyyy-MMM-dd HH:mm:ss,SSS} %5p - %m [%x] [%c{2}] [%t]%n"/>
 		</layout>		
 	</appender>
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
